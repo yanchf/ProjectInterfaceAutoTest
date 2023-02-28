@@ -1,4 +1,5 @@
 A.简要介绍
+
     1.该项目对外提供两种excel文件，分别是位于./testcase_data/excel 下的test_*.xlsx文件，./testcase_data/env 下的env.xlsx
         a.testcase_data/excel/test_*.xlsx 存储测试接口相关数据
         b.testcase_data/env/env.xlsx 存储测试接口相关环境变量
@@ -9,6 +10,7 @@ A.简要介绍
         生成一份测试报告
 
 B.使用方法
+
     1.安装Python 
     2.安装pip 工具
     3.更换pip源
@@ -19,6 +21,7 @@ B.使用方法
     
     
 C.*要点须知
+
     1.testcase_data/excel/testcase_*.xlsx 中有第一个工作表init_token存放登录相关接口信息
         超级码3.0系统一般登录流程是
             1.登录
@@ -57,6 +60,7 @@ C.*要点须知
         
     
 D.额外事项
+
     1.不同系统获取token方式不同，如果需要套用到 有其他获取token方式的系统，需要重写common/testcase_data_util.py文件
     2.建议集成jenkins 建立接口自动化测试项目
     3.建议扩展allure插件，生成美观的测试报告
