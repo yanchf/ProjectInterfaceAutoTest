@@ -27,18 +27,27 @@ def get_testcase_file(path=r'testcase_data/excel'):
 # 获取token
 def _init_tokens(file_list: list = get_testcase_file()):
     testcase_token = dict()
+    testcase_token_real = dict()
 
     for work_xlsx in file_list:
         wb = openpyxl.load_workbook(work_xlsx)
-        if "init_token" not in wb.sheetnames:
+        if ("init_token" not in wb.sheetnames) and ("init_token_real" not in wb.sheetnames):
             raise TypeError("xlsx格式错误")
         else:
+            # 获取测试环境登录相关接口
             sheet = wb["init_token"]
             testcase_token[work_xlsx.stem] = list()
             for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=sheet.min_column,
                                        max_col=sheet.max_column, values_only=True):
                 testcase_token[work_xlsx.stem].append(dict(zip(xlsx_format, row)))
-    return testcase_token
+            # 获取正式环境相关接口
+            sheet_real = wb["init_token_real"]
+            testcase_token_real[work_xlsx.stem] = list()
+            for row in sheet_real.iter_rows(min_row=2, max_row=sheet.max_row, min_col=sheet.min_column,
+                                       max_col=sheet.max_column, values_only=True):
+                testcase_token_real[work_xlsx.stem].append(dict(zip(xlsx_format, row)))
+
+    return {"test_env": testcase_token, "real_env": testcase_token_real}
 
 
 # 获取测试接口集合
@@ -87,8 +96,9 @@ def get_tokens():
     headers = None
 
     # 获取token集合
-    token_dict = _init_tokens()
-    # 获取系统是否正式环境/测试环境
+    # 按照对应测试环境获取登录相关的接口字典
+    token_dict = _init_tokens()[arg_env]
+    # 获取系统正式环境/测试环境
     env_dict = _init_env()
 
     # 抽取

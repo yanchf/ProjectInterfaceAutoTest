@@ -16,8 +16,12 @@ B.使用方法
     3.更换pip源
     4.再根目录下打开cmd，输入pip install -r requirements.txt。初始化项目环境
     5.依照testcase_data/excel/testcase_模板.xlsx 创建文件
+        a.填写测试环境登陆接口 - login/org/sys
+        b.填写正式环境登陆接口 - login/org/sys
     6.参考testcase_data/excel/env.xlsx 文件输入测试运行环境
-    7.在cmd界面中输入run_test.py 或者 python run_test.py 运行项目
+        a.填写所需要进行测试项目的测试环境域名 及 正式环境域名
+    7.在config.py 中配置钉钉机器人相关
+    8.在cmd界面中输入run_test.py 或者 python run_test.py 运行项目
     
     
 C.*要点须知

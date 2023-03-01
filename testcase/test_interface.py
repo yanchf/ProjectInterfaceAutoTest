@@ -15,7 +15,7 @@ class TestInterface:
         # 日志系统记录测试用例数据
         logging_util.info(init_testcase)
         # 日志系统记录接口测试结果
-        logging_util.info(response.json())
+        logging_util.info(response.text)
 
         # 断言
         # 硬断言接口是否正常
