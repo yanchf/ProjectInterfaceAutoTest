@@ -26,7 +26,9 @@ def get_testcase_file(path=r'testcase_data/excel'):
 
 # 获取token
 def _init_tokens(file_list: list = get_testcase_file()):
+    # 存放测试环境登陆数据
     testcase_token = dict()
+    # 存放正式环境登陆数据
     testcase_token_real = dict()
 
     for work_xlsx in file_list:
@@ -36,12 +38,14 @@ def _init_tokens(file_list: list = get_testcase_file()):
         else:
             # 获取测试环境登录相关接口
             sheet = wb["init_token"]
+            # 获取正式环境相关接口
+            sheet_real = wb["init_token_real"]
+
             testcase_token[work_xlsx.stem] = list()
             for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=sheet.min_column,
                                        max_col=sheet.max_column, values_only=True):
                 testcase_token[work_xlsx.stem].append(dict(zip(xlsx_format, row)))
-            # 获取正式环境相关接口
-            sheet_real = wb["init_token_real"]
+
             testcase_token_real[work_xlsx.stem] = list()
             for row in sheet_real.iter_rows(min_row=2, max_row=sheet.max_row, min_col=sheet.min_column,
                                        max_col=sheet.max_column, values_only=True):
